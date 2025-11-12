@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity 1 - Simple Block Chain</title>
+</head>
+
+<body>
+    <div class="card">
+        <label for="randomTexts">Some Random Text</label>
+        <textarea id="randomTexts" name="randomTexts" placeholder="What's on your mind?" rows="4"></textarea>
+        <button id="submitBtn">Submit</button>
+    </div>
+
+
+
+    <div id="itemsContainer">
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    const data = [];
+    let prevHashedText = ''
+    document.getElementById('submitBtn').addEventListener('click', function () {
+        const randomTexts = document.getElementById('randomTexts').value.trim().replace(/\s+/g, '');
+        const itemsContainer = document.getElementById('itemsContainer');
+
+        if (randomTexts === '')
+            alert('Please add some text!')
+
+        const hashedText = 'HASH-' + Array.from(randomTexts)
+            .map(c => c.charCodeAt(0).toString(36))
+            .join('')
+            .toUpperCase();
+
+            
+            const initialObject = {
+                'text': randomTexts,
+                'prev': data.length > 0 ? prevHashedText : '0000',
+                'current': hashedText
+            }
+            
+            data.push(initialObject)
+            prevHashedText = hashedText
+
+        document.getElementById('itemsContainer').value = '';
+
+        itemsContainer.innerHTML = data.map((item, index) =>
+            `<div class="item">
+                <div><b>ID:</b> ${index + 1} </div>
+                <div><b>Data:</b> ${item.text} </div>
+                <div><b>Previous Hash:</b> ${item.prev} </div>
+                <div><b>Hash:</b> ${item.current} </div>
+            </div>`).join('');
+    })
+</script>
+
+<style>
+    p {
+        line-height: .5;
+    }
+
+    #itemsContainer {
+        min-width: 500px;
+        max-width: 90%;
+        display: grid;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .item {
+        font-size: 11px;
+        background-color: rgba(240, 248, 255, 0.151);
+        border: 1px solid rgb(196, 196, 196);
+        border-radius: 20px;
+        padding: 10px 20px;
+        display: flex;
+        gap: 4px;
+        flex-direction: column;
+    }
+
+    .card {
+        min-width: 400px;
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    body {
+        background-color: rgb(231, 252, 255);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    button {
+        border: 1px solid rgb(196, 196, 196);
+        padding: 10px 20px;
+        border-radius: 20px;
+        background-color: rgb(5, 122, 151);
+        color: white;
+    }
+
+    textarea {
+        background-color: rgba(240, 248, 255, 0.151);
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    label {
+        font-weight: 600;
+    }
+</style>
