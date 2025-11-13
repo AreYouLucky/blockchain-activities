@@ -38,15 +38,15 @@
             .join('')
             .toUpperCase();
 
-            
-            const initialObject = {
-                'text': randomTexts,
-                'prev': data.length > 0 ? prevHashedText : '0000',
-                'current': hashedText
-            }
-            
-            data.push(initialObject)
-            prevHashedText = hashedText
+
+        const initialObject = {
+            'text': randomTexts,
+            'prev': data.length > 0 ? prevHashedText : '0000',
+            'current': hashedText
+        }
+
+        data.push(initialObject)
+        prevHashedText = hashedText
 
         document.getElementById('itemsContainer').value = '';
 
@@ -67,13 +67,19 @@
 
     #itemsContainer {
         min-width: 300px;
-        max-width: 600px;
+        max-width: 500px;
         max-width: 90%;
         display: grid;
 
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+        #itemsContainer{
+            grid-template-columns: 1fr;  
+        }
     }
 
     .item {
