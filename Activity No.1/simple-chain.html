@@ -30,9 +30,9 @@
         const randomTexts = document.getElementById('randomTexts').value.trim().replace(/\s+/g, '');
         const itemsContainer = document.getElementById('itemsContainer');
 
-        if (randomTexts === ''){
+        if (randomTexts === '') {
             alert('Please add some text!')
-            return 
+            return
         }
 
         const hashedText = 'HASH-' + Array.from(randomTexts)
@@ -65,6 +65,8 @@
 <style>
     p {
         line-height: .5;
+        text-wrap: balance;
+        overflow-wrap: break-word;
     }
 
     #itemsContainer {
@@ -78,8 +80,8 @@
     }
 
     @media screen and (max-width: 600px) {
-        #itemsContainer{
-            grid-template-columns: 1fr;  
+        #itemsContainer {
+            grid-template-columns: 1fr;
         }
     }
 
