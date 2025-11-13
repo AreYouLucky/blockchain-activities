@@ -30,8 +30,10 @@
         const randomTexts = document.getElementById('randomTexts').value.trim().replace(/\s+/g, '');
         const itemsContainer = document.getElementById('itemsContainer');
 
-        if (randomTexts === '')
+        if (randomTexts === ''){
             alert('Please add some text!')
+            return 
+        }
 
         const hashedText = 'HASH-' + Array.from(randomTexts)
             .map(c => c.charCodeAt(0).toString(36))
@@ -68,7 +70,6 @@
     #itemsContainer {
         min-width: 300px;
         max-width: 500px;
-        max-width: 90%;
         display: grid;
 
         display: grid;
@@ -96,7 +97,6 @@
     .card {
         min-width: 300px;
         max-width: 500px;
-        max-width: 80%;
         display: flex;
         flex-direction: column;
         gap: 10px;
