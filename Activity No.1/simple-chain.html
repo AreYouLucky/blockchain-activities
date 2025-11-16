@@ -26,6 +26,7 @@
 <script>
     const data = [];
     let prevHashedText = ''
+    let index =  0;
     document.getElementById('submitBtn').addEventListener('click', function () {
         const randomTexts = document.getElementById('randomTexts').value.trim().replace(/\s+/g, '');
         const itemsContainer = document.getElementById('itemsContainer');
@@ -35,7 +36,7 @@
             return
         }
 
-        const hashedText = 'HASH-' + Array.from(randomTexts)
+        const hashedText = 'HASH-' + Array.from(index+randomTexts)
             .map(c => c.charCodeAt(0).toString(36))
             .join('')
             .toUpperCase();
@@ -46,6 +47,7 @@
             'prev': data.length > 0 ? prevHashedText : '0000',
             'current': hashedText
         }
+        index++;
 
         data.push(initialObject)
         prevHashedText = hashedText
